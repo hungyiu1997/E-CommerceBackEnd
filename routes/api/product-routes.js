@@ -10,7 +10,8 @@ router.get('/', (req, res) => {
   Product.findAll({
     includes: [Category, Tag],
   })
-  .then ((product) => res,json(product))
+  .then ((Category) => res.json(Category))
+  .then ((Tag) => res.json(Tag))
   .catch ((err) => res.status(500).json(err))
 });
 
@@ -22,9 +23,10 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id
     },
-    include: [Product]
+    include: [Category, Tag]
   })
-  .then((product) => res.json(product))
+  .then((Category) => res.json(Category))
+  .then((Tag) => res.json(Tag))
   .catch((err) => res.status(400).json(err))
 });
 
@@ -66,6 +68,10 @@ router.put('/:id', (req, res) => {
   Product.update(req.body, {
     where: {
       id: req.params.id,
+      name: req.body.product_name,
+      price: req.body.price,
+      stock: req.body.stock,
+      catergory_id: req.body.catergory_id
     },
   })
     .then((product) => {
