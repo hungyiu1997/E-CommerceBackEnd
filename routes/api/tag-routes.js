@@ -39,7 +39,7 @@ router.put('/:id', (req, res) => {
   Tag.update(req.body, {
     where: {
       id: req.params.id,
-      
+
     },
   })
   .then((tag) => {
@@ -49,6 +49,15 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete on tag by its `id` value
+  Tag.destory({
+    where: {
+      tag_id: req.params.tag_id,
+    },
+  })
+  .then((deletedTag) => {
+    res.json(deletedTag);
+  })
+  .catch((err) => res.json(err));
 });
 
 module.exports = router;
