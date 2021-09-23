@@ -22,11 +22,13 @@ Category.hasMany(Product, {
 });
 
 Product.belongsToMany(Tag, {
+  through: ProductTag,
   foreignKey: 'product_id',
 });
 
 Tag.belongsToMany(Product, {
-  foreignKey: 'product_id'
+  through: ProductTag,
+  foreignKey: 'tag_id',
 });
 
 module.exports = {

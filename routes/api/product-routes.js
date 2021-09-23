@@ -10,8 +10,7 @@ router.get('/', (req, res) => {
   Product.findAll({
     includes: [Category, Tag],
   })
-  .then ((Category) => res.json(Category))
-  .then ((Tag) => res.json(Tag))
+  .then ((data) => res.json(data))
   .catch ((err) => res.status(500).json(err))
 });
 
@@ -25,8 +24,7 @@ router.get('/:id', (req, res) => {
     },
     include: [Category, Tag]
   })
-  .then((Category) => res.json(Category))
-  .then((Tag) => res.json(Tag))
+  .then ((data) => res.json(data))
   .catch((err) => res.status(400).json(err))
 });
 
