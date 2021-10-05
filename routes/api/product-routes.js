@@ -55,13 +55,11 @@ router.post('/', (req, res) => {
 // update product
 router.put('/:id', (req, res) => {
   // update product data
+  console.log('req.body', req.body);
+  console.log('req.params', req.params);
   Product.update(req.body, {
     where: {
       id: req.params.id,
-      name: req.body.product_name,
-      price: req.body.price,
-      stock: req.body.stock,
-      catergory_id: req.body.catergory_id
     },
   })
     .then((product) => {
@@ -93,14 +91,14 @@ router.put('/:id', (req, res) => {
     })
     .then((updatedProductTags) => res.json(updatedProductTags))
     .catch((err) => {
-      // console.log(err);
+      console.log(err);
       res.status(400).json(err);
     });
 });
 
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
-  Product.destory({
+  Product.destroy({
     where: {
       product_id: req.params.product_id,
     },
